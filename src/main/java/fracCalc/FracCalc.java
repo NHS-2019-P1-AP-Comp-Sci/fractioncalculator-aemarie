@@ -1,28 +1,31 @@
 /**
  * @author Mr. Rasmussen
  */
-/**
- * @author Mr. Rasmussen
- */
 
 package fracCalc;
 
 import java.util.*;
 
 public class FracCalc {
+		
+		//This private static method is used and invoked only within the FracCalc class for the Scanner under the variable input
+        private static Scanner input;
 
-        // TODO: Read the input from the user and call produceAnswer with an equation
+		// TODO: Read the input from the user and call produceAnswer with an equation
     	
     	public static void main(String[] args) {
-		    String fraction = "";
-		    Scanner input = new Scanner(System.in);
+		    System.out.println("Insert the function you want to evaluate (type 'quit' to exit program):");
+    		String finish = "";
+		    //Scanner is used to take the the function the user inputs
+		    input = new Scanner(System.in);
 		        String total = input.nextLine();
 		        int quitTest = total.indexOf("quit");
+		        //A while loop is used to let user quit the program when wanted
 		        while (quitTest == -1) {
-		        fraction = produceAnswer(total);
-		        System.out.println(fraction);
-		        total = input.nextLine();
-		        quitTest = total.indexOf("quit");
+			        finish = produceAnswer(total);
+			        System.out.println(finish);
+			        total = input.nextLine();
+			        quitTest = total.indexOf("quit");
 		        }       
     	}
 
@@ -36,6 +39,7 @@ public class FracCalc {
     //      e.g. return ==> "1_1/4"
     public static String produceAnswer(String input) {
         // TODO: Implement this function to produce the solution to the input
+    	String finish = "";
     	int function = input.indexOf(" ");
 	    String mathoperation = input.substring(function + 1, function + 2);
 	    String fraction2 = input.substring(function + 3);
@@ -63,10 +67,8 @@ public class FracCalc {
 	    	finish = divide(wholeNum1, num1, denom1, wholeNum2, num2, denom2);
 	    }
 	        return finish;
-	    }
-
-        return "";
     }
+	    
 
     // TODO: Fill in the space below with any helper methods that you think you will need
 	public static int findingWholeNum(String input) {
@@ -187,7 +189,3 @@ public class FracCalc {
 	}
 
 	}
-
-
-
-}
