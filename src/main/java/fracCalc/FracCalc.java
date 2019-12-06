@@ -129,63 +129,106 @@ public class FracCalc {
 	public static String format(int num3, int n3, int d3) {
 	    String fraction = "";
 	    if (d3 == 1) {
-	    num3 = n3 + num3;
-	    n3 = 0;
+		    num3 = n3 + num3;
+		    n3 = 0;
 	    }
 	    if (n3 < 0 && num3 < 0) {
-	    n3 = n3 * -1;
+	    	n3 = n3 * -1;
 	    }
 	    if (n3 != 0 && num3 != 0) {
-	    fraction = num3 + "_" + n3 + "/" + d3;
+	    	fraction = num3 + "_" + n3 + "/" + d3;
 	    }
 	    else if (num3 != 0 && n3 == 0) {
-	    fraction = "" + num3;
+	    	fraction = "" + num3;
 	    }
 	    else if (n3 == 0 && num3 == 0) {
-	    fraction = "" + 0;
+	    	fraction = "" + 0;
 	    }
 	    else if (num3 == 0 && n3 != 0){
-	    fraction = n3 + "/" + d3;
+	    	fraction = n3 + "/" + d3;
 	    }
 	    return fraction;
 	}
 	
+	//This method is to subtract fractions
 	public static String subtract(int num1, int n1, int d1, int num2, int n2, int d2) {
 	    int num3 = num1 - num2;
 	    n1 = n1 * d2;
 	    n2 = n2 * d1;
 	    int d3 = d1 * d2;
 	    int n3 = n1 - n2;
+	    reduce(d3, n3);
 	    String fraction = format(num3, n3, d3);
 	    return fraction;
 	}
 	
+	//This method is to add fractions
 	public static String add(int num1, int n1, int d1, int num2, int n2, int d2) {
 	    int num3 = num1 + num2;
 	    n1 = n1 * d2;
 	    n2 = n2 * d1;
 	    int d3 = d1 * d2;
 	    int n3 = n1 + n2;
+	    reduced(d3, n3);
 	    String fraction = format(num3, n3, d3);
 	    return fraction;
 	}
 	
+	//This method is to multiply fractions
 	public static String multiply(int num1, int n1, int d1, int num2, int n2, int d2) {
 	    num1 = (num1 * d1) + n1;
 	    num2 = (num2 * d2) + n2;
 	    int num3 = num1 * num2;
 	    int denom3 = d1 * d2;
+	    reduced(num3, denom3);
 	    String fraction = format(0, num3, denom3);
 	    return fraction;
 	}
 	
+	//This method is to divide to fractions
 	public static String divide(int num1, int n1, int d1, int num2, int n2, int d2) {
 	    num1 = (num1 * d1) + n1;
 	    num2 = (num2 * d2) + n2;
 	    int num3 = num1 * d2;
 	    int denom3 = num2 * d1;
+	    reduced(num3, denom3);
 	    String fraction = format(0, num3, denom3);
 	    return fraction;
 	}
-
+	
+	static int gcd(int a, int b){  
+	    if (a == 0)  
+	        return b;  
+	    return gcd(b%a, a);  
+	}  
+	  
+	// Function to convert the obtained fraction  
+	// into it's simplest form  
+	static void reduced(int den3, int num3){  
+		
+	    // Finding greatest common denominator of both terms  
+	    int commonfactor = gcd(num3,den3);  
+	  
+	    // Converting both terms into simpler  
+	    // terms by dividing them by common factor  
+	    den3 = den3/commonfactor;  
+	    num3 = num3/commonfactor; 
+	    System.out.println(num3+"/"+den3); 
+	}  
+	static void reduce(int d3, int n3){  
+		
+	    // Finding greatest common denominator of both terms  
+	    int commonfactor = gcd(n3,d3);  
+	  
+	    // Converting both terms into simpler  
+	    // terms by dividing them by common factor  
+	    d3 = d3/commonfactor;  
+	    n3 = n3/commonfactor; 
+	    System.out.println(n3+"/"+d3); 
 	}
+	
+}
+
+
+
+
