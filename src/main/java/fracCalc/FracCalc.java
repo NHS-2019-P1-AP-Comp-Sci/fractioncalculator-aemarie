@@ -24,7 +24,7 @@ public class FracCalc {
 
 		while (quitTest == -1) {
 			finish = produceAnswer(total);
-			System.out.println("answer: " + finish);
+			System.out.println("Answer: " + finish);
 
 			total = input.nextLine();
 			quitTest = total.indexOf("quit");
@@ -155,7 +155,6 @@ public class FracCalc {
 		n2 = n2 * d1;
 		int d3 = d1 * d2;
 		int n3 = n1 - n2;
-		System.out.println("subtract>>");
 
 		int commonfactor = gcd(n3, d3);
 
@@ -164,7 +163,30 @@ public class FracCalc {
 		d3 = d3 / commonfactor;
 		n3 = n3 / commonfactor;
 
-		String fraction = format(num3, n3, d3);
+		int whole = 0;
+		if (n3 > d3) {
+			whole = n3 / d3;
+		} else {
+			whole = 0;
+		}
+
+		int n4 = 0;
+		if (n3 > d3) {
+			n4 = n3 % d3;
+		} else {
+			n4 = n3;
+		}
+
+		int commonfactor1 = gcd(n4, d3);
+
+		// Converting both terms into simpler
+		// terms by dividing them by common factor
+		d3 = d3 / commonfactor1;
+		n4 = n4 / commonfactor1;
+
+		d3 = Math.abs(d3);
+
+		String fraction = format(whole + num3, n4, d3);
 		return fraction;
 	}
 
@@ -183,7 +205,30 @@ public class FracCalc {
 		d3 = d3 / commonfactor;
 		n3 = n3 / commonfactor;
 
-		String fraction = format(num3, n3, d3);
+		int whole = 0;
+		if (n3 > d3) {
+			whole = n3 / d3;
+		} else {
+			whole = 0;
+		}
+
+		int n4 = 0;
+		if (n3 > d3) {
+			n4 = n3 % d3;
+		} else {
+			n4 = n3;
+		}
+
+		int commonfactor1 = gcd(n4, d3);
+
+		// Converting both terms into simpler
+		// terms by dividing them by common factor
+		d3 = d3 / commonfactor1;
+		n4 = n4 / commonfactor1;
+
+		d3 = Math.abs(d3);
+
+		String fraction = format(whole + num3, n4, d3);
 
 		return fraction;
 	}
@@ -223,7 +268,14 @@ public class FracCalc {
 		denom3 = denom3 / commonfactor1;
 		num4 = num4 / commonfactor1;
 
+		denom3 = Math.abs(denom3);
+
+		if (whole == 0) {
+			whole = num4 / denom3;
+			num4 = num4 % denom3;
+		}
 		String fraction = format(whole, num4, denom3);
+
 		return fraction;
 	}
 
@@ -262,11 +314,16 @@ public class FracCalc {
 		denom3 = denom3 / commonfactor1;
 		num4 = num4 / commonfactor1;
 
-		String fraction = format(whole, num4, denom3);
-		return fraction;
+		denom3 = Math.abs(denom3);
 
-		// String fraction = format(0, num3, denom3);
-		// return fraction;
+		if (whole == 0) {
+			whole = num4 / denom3;
+			num4 = num4 % denom3;
+		}
+
+		String fraction = format(whole, num4, denom3);
+
+		return fraction;
 	}
 
 	static int gcd(int a, int b) {
@@ -275,4 +332,4 @@ public class FracCalc {
 		return gcd(b % a, a);
 	}
 
-}
+}	
